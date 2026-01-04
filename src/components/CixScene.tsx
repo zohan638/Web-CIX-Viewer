@@ -131,6 +131,15 @@ const toolpathPoints = (path: RoutingPath) => {
   return pts;
 };
 
+const toSegmentPoints = (pts: THREE.Vector3[]) => {
+  if (pts.length < 2) return pts;
+  const segments: THREE.Vector3[] = [];
+  for (let i = 0; i < pts.length - 1; i += 1) {
+    segments.push(pts[i], pts[i + 1]);
+  }
+  return segments;
+};
+
 const PanelMesh = ({ panel, thickness = 2 }: { panel: RecoveredPanel; thickness?: number }) => {
   const { shape, extrudeGeom, edgeGeom } = useMemo(() => {
     if (!panel?.polygon?.length) return { shape: null, extrudeGeom: null, edgeGeom: null };
@@ -292,11 +301,11 @@ const CixScene = ({
           routing.map((path) => {
             const pts = toolpathPoints(path);
             if (!pts || pts.length < 2) return null;
-            const geo = new THREE.BufferGeometry().setFromPoints(pts);
+            const geo = new THREE.BufferGeometry().setFromPoints(toSegmentPoints(pts));
             return (
-              <line key={`path-${path.id ?? Math.random()}`} geometry={geo}>
+              <lineSegments key={`path-${path.id ?? Math.random()}`} geometry={geo}>
                 <lineBasicMaterial color="#22c55e" linewidth={2} depthWrite={false} depthTest={false} />
-              </line>
+              </lineSegments>
             );
           })}
 
