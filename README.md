@@ -1,21 +1,23 @@
 # CIX Viewer
 
-CIX Viewer is a browser-based viewer for CIX CNC files used in woodworking and panel processing. Drop a .cix file and explore the sheet, labels, toolpaths, drill holes, and recovered panels in a 3D view. All parsing happens in the browser; files are not uploaded.
+CIX Viewer is a fast, browser-based viewer for CIX CNC programs used in woodworking and panel processing. Drop a `.cix` file to inspect the sheet, labels, toolpaths, drill holes, and recovered panels in a 3D scene. All parsing happens in the browser; files are not uploaded.
+
+Live site: https://zohan638.github.io/Web-CIX-Viewer/
 
 ## What is CIX?
-CIX is a text-based, macro-driven CNC interchange format used in the woodworking industry. It originated in the Biesse Group ecosystem (BiesseWorks/BSolid) and is used by CAM post-processors to program Biesse CNC routers and nesting lines. CIX files define sheet dimensions and machining macros (routing, drilling, labeling) rather than full 3D geometry. Vendor-specific variants exist, so parsers typically target a common subset.
+CIX is a text-based, macro-driven CNC interchange format used in the woodworking industry. It originated in the Biesse Group ecosystem (BiesseWorks/BSolid) and is used by CAM post-processors to drive Biesse CNC routers, nesting lines, and drilling machines. CIX files define sheet dimensions and machining macros (routing, drilling, labeling) rather than full 3D geometry. Vendor-specific variants exist, so parsers typically target a common subset.
 
-## Features
-- Parses MAINDATA for sheet size and thickness (LPX, LPY, LPZ).
-- Reads LABEL macros for part labels and placement.
-- Extracts ROUT toolpaths including line and arc segments.
+## Highlights
+- Reads MAINDATA for sheet size and thickness (LPX, LPY, LPZ).
+- Parses LABEL macros for part labels and placement.
+- Extracts ROUT toolpaths, including line and arc segments.
 - Reads BV macros for drilling patterns.
-- Recovers panels by buffering toolpaths by kerf and subtracting from the sheet using clipper-lib.
-- Renders everything in 3D with React Three Fiber and view toggles.
+- Recovers panels by buffering toolpaths by kerf and subtracting from the sheet with clipper-lib.
+- Renders everything in 3D with React Three Fiber and quick view toggles.
 
 ## How it works
 1. Parse MAINDATA for sheet dimensions.
-2. Parse MACRO blocks to collect LABEL and BV data.
+2. Scan MACRO blocks to collect LABEL and BV data.
 3. Extract ROUT paths (start, line, arc) with depth and tool diameter.
 4. Offset routing paths by bit radius, union the kerfs, and subtract from the sheet to estimate finished panels.
 5. Attach drill holes to recovered panels and render sheet, paths, holes, labels, and panels.

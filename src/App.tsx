@@ -73,7 +73,17 @@ const App = () => {
             Drop a .CIX to view sheet, labels, toolpaths, and recovered panels.
           </div>
         </div>
-        <div className="badge">Shapely alt: clipper-lib (offset/union/diff)</div>
+        <div className="header-actions">
+          <div className="badge">Shapely alt: clipper-lib (offset/union/diff)</div>
+          <a
+            className="header-link"
+            href="https://github.com/zohan638/Web-CIX-Viewer"
+            target="_blank"
+            rel="noreferrer"
+          >
+            GitHub
+          </a>
+        </div>
       </header>
 
       <div className="content">
