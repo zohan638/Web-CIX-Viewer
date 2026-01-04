@@ -114,19 +114,6 @@ const App = () => {
                 </div>
               )}
 
-              <h3>Notes</h3>
-              <ul className="list">
-                <li>Y coordinates are flipped to a bottom-left origin for consistency in the 3D view.</li>
-                <li>
-                  Tool kerfs are buffered with <code>clipper-lib</code> to subtract cuts from the sheet and recover
-                  panel polygons.
-                </li>
-                <li>
-                  Arcs are shown as straight segments for now; if you need true arcs, we can interpolate more points
-                  from the macro parameters.
-                </li>
-              </ul>
-
               <h3>View Toggles</h3>
               <div className="toggles">
                 {[
