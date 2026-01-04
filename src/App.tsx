@@ -92,7 +92,7 @@ const App = () => {
           <label className="upload">
             <input
               type="file"
-              accept=".cix,text/plain"
+              accept=".cix,.CIX,text/plain,application/octet-stream"
               style={{ display: "none" }}
               onChange={(evt) => handleFile(evt.target.files?.[0])}
             />
